@@ -1,30 +1,100 @@
-<!doctype html>
-<html lang="zh-Hant">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>耳鼻咽喉內窺鏡檢查</title>
-    <meta http-equiv="refresh" content="0; url=brochure.pdf">
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: #f5faf9;
-        color: #173f3d;
-      }
-      body {
-        display: grid;
-        place-items: center;
-        text-align: center;
-      }
-      a { color: #087e79; }
-    </style>
-  </head>
-  <body>
-    <p>正在開啟衛教小冊子…<br><a href="brochure.pdf">如未自動開啟，請按此查看 PDF</a></p>
-    <script>
-      window.location.replace(new URL("brochure.pdf", window.location.href).href);
-    </script>
-  </body>
-</html>
+<!DOCTYPE html>
+
+<html lang="zh-Mo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>耳鼻咽喉內窺鏡檢查 | 仁伯爵綜合醫院</title>
+<style>
+  :root{
+    --teal-deep:#0a3d36;
+    --paper:#faf8f3;
+    --ink:#1b2b28;
+    --muted:#5b675f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    text-align:center;
+    padding:24px;
+  }
+  .box{max-width:360px;}
+  .spinner{
+    width:38px;height:38px;
+    border:4px solid #e3ddcf;
+    border-top-color:var(--teal-deep);
+    border-radius:50%;
+    margin:0 auto 20px;
+    animation:spin 0.9s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  h1{
+    font-size:1.05rem;
+    color:var(--teal-deep);
+    margin:0 0 8px;
+  }
+  p{
+    color:var(--muted);
+    font-size:0.9rem;
+    margin:0 0 18px;
+  }
+  a.manual-link{
+    display:inline-block;
+    background:var(--teal-deep);
+    color:#fff;
+    text-decoration:none;
+    padding:10px 22px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:0.92rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="box">
+  <div class="spinner"></div>
+  <h1>耳鼻咽喉內窺鏡檢查</h1>
+  <p>正在開啟手冊，請稍候⋯</p>
+  <a class="manual-link" href="booklet.pdf">如未自動開啟，請點此查看</a>
+</div>
+
+<script>
+  // ====== 掃碼統計：呼叫 Google Apps Script Web App ======
+  // 請將下方網址換成你自己部署的 Google Apps Script 網址（見教學文件 setup-guide.md）
+  const TRACKING_URL = "https://script.google.com/macros/s/AKfycbzoO7xBLkDiRk1j1zENwlpASYx_PCaZ49xCpenCyoi0pQL9s0hoL21-ygX9iuZFjpl-/exec";
+  const PDF_URL = "booklet.pdf";
+
+  function goToBooklet(){
+    window.location.replace(PDF_URL);
+  }
+
+  (function trackVisit(){
+    if (!TRACKING_URL || TRACKING_URL.indexOf("PASTE_YOUR") !== -1) {
+      // 尚未設定統計網址：略過記錄，直接跳轉
+      goToBooklet();
+      return;
+    }
+    // 記錄掃碼次數後才跳轉；若記錄逾時或失敗，最多等待 1.2 秒仍會跳轉，
+    // 確保統計功能故障不會影響病人閱讀手冊。
+    let done = false;
+    const proceed = function(){
+      if (done) return;
+      done = true;
+      goToBooklet();
+    };
+    fetch(TRACKING_URL, { method: "GET", mode: "no-cors" })
+      .then(proceed)
+      .catch(proceed);
+    setTimeout(proceed, 1200);
+  })();
+</script>
+
+</body>
