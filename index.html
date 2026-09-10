@@ -63,23 +63,23 @@
   <div class="spinner"></div>
   <h1>耳鼻咽喉內窺鏡檢查</h1>
   <p>正在開啟手冊，請稍候⋯</p>
-  <a class="manual-link" href="brochure.pdf">如未自動開啟，請點此查看</a>
+  <a class="manual-link" href="booklet.pdf">如未自動開啟，請點此查看</a>
 </div>
 
 <script>
   // ====== 掃碼統計：呼叫 Google Apps Script Web App ======
   // 請將下方網址換成你自己部署的 Google Apps Script 網址（見教學文件 setup-guide.md）
-  const TRACKING_URL = "https://script.google.com/macros/s/AKfycbwl-hVPSuha3ejNO97x-s7-V88ybtMZ1XlHKPe9qWPPad1XyE9Pho748FbljCcB0kMP_Q/exec";
-  const PDF_URL = "brochure.pdf";
+  const TRACKING_URL = "https://script.google.com/macros/s/AKfycbzoO7xBLkDiRk1j1zENwlpASYx_PCaZ49xCpenCyoi0pQL9s0hoL21-ygX9iuZFjpl-/exec";
+  const PDF_URL = "booklet.pdf";
 
-  function goToBrochure(){
+  function goToBooklet(){
     window.location.replace(PDF_URL);
   }
 
   (function trackVisit(){
     if (!TRACKING_URL || TRACKING_URL.indexOf("PASTE_YOUR") !== -1) {
       // 尚未設定統計網址：略過記錄，直接跳轉
-      goToBrochure();
+      goToBooklet();
       return;
     }
     // 記錄掃碼次數後才跳轉；若記錄逾時或失敗，最多等待 1.2 秒仍會跳轉，
@@ -88,7 +88,7 @@
     const proceed = function(){
       if (done) return;
       done = true;
-      goToBrochure();
+      goToBooklet();
     };
     fetch(TRACKING_URL, { method: "GET", mode: "no-cors" })
       .then(proceed)
@@ -98,3 +98,4 @@
 </script>
 
 </body>
+</html>
